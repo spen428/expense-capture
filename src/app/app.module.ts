@@ -19,11 +19,21 @@ function excludeFromProd<T>(module: ModuleWithProviders<T>): T[] | ModuleWithPro
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({}, {
+      runtimeChecks: {
+        strictActionImmutability: true,
+        strictActionSerializability: true,
+        strictActionTypeUniqueness: true,
+        strictActionWithinNgZone: true,
+        strictStateImmutability: true,
+        strictStateSerializability: true
+      }
+    }),
     EffectsModule.forRoot([]),
     excludeFromProd(StoreDevtoolsModule.instrument())
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
