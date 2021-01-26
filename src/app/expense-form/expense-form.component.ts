@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ExpenseType} from '../enums/expense-types.enum';
+import {EnumUtils} from '../utils/enum-utils';
 
 @Component({
   selector: 'app-expense-form',
@@ -7,15 +8,11 @@ import {ExpenseType} from '../enums/expense-types.enum';
   styleUrls: ['./expense-form.component.scss']
 })
 export class ExpenseFormComponent implements OnInit {
-  public readonly expenseTypes: number[] = Object.keys(ExpenseType).filter(x => !isNaN(Number(x))).map(x => Number(x));
+  public readonly expenseTypes: number[] = EnumUtils.enumerate(ExpenseType);
 
   constructor() {
   }
 
   ngOnInit(): void {
-  }
-
-  public nameOf(n: number): string {
-    return Object.keys(ExpenseType).filter(x => isNaN(Number(x)))[n];
   }
 }

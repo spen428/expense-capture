@@ -8,6 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DebugElement} from '@angular/core';
 import {DateAdapter} from '@angular/material/core';
+import {ExpenseTypeNamePipe} from '../pipes/expense-type-name.pipe';
 
 describe('ExpenseFormComponent', () => {
   let component: ExpenseFormComponent;
@@ -15,7 +16,10 @@ describe('ExpenseFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ExpenseFormComponent],
+      declarations: [
+        ExpenseFormComponent,
+        ExpenseTypeNamePipe
+      ],
       imports: [
         BrowserAnimationsModule,
         MatFormFieldModule,
@@ -40,16 +44,16 @@ describe('ExpenseFormComponent', () => {
 
   describe('should render all form fields', () => {
     const formFieldNameList = [
-      ['Expense Name', 'mat-form-field'],
-      ['Expense Description', 'mat-form-field'],
-      ['Expense Type', 'mat-form-field'],
-      ['Expense Date', 'mat-form-field'],
-      ['Monetary Value', 'mat-form-field'],
+      'Expense Name',
+      'Expense Description',
+      'Expense Type',
+      'Expense Date',
+      'Monetary Value',
     ];
 
-    formFieldNameList.forEach(([name, selector]) => {
+    formFieldNameList.forEach((name) => {
       it(`should render the ${name} field`, () => {
-        const formFields = fixture.debugElement.queryAll(By.css(selector));
+        const formFields = fixture.debugElement.queryAll(By.css('mat-form-field'));
 
         const field = formFields.find(x => {
           const label = x.query(By.css('mat-label'));

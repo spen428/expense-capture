@@ -13,6 +13,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
+import { ExpenseTypeNamePipe } from './pipes/expense-type-name.pipe';
 
 function excludeFromProd<T>(module: ModuleWithProviders<T>): T[] | ModuleWithProviders<T> {
   return environment.production ? [] : module;
@@ -21,7 +22,8 @@ function excludeFromProd<T>(module: ModuleWithProviders<T>): T[] | ModuleWithPro
 @NgModule({
   declarations: [
     AppComponent,
-    ExpenseFormComponent
+    ExpenseFormComponent,
+    ExpenseTypeNamePipe
   ],
   imports: [
     BrowserModule,
