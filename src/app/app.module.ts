@@ -7,6 +7,12 @@ import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
+import {ExpenseFormComponent} from './expense-form/expense-form.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
 
 function excludeFromProd<T>(module: ModuleWithProviders<T>): T[] | ModuleWithProviders<T> {
   return environment.production ? [] : module;
@@ -14,7 +20,8 @@ function excludeFromProd<T>(module: ModuleWithProviders<T>): T[] | ModuleWithPro
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ExpenseFormComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +37,12 @@ function excludeFromProd<T>(module: ModuleWithProviders<T>): T[] | ModuleWithPro
       }
     }),
     EffectsModule.forRoot([]),
-    excludeFromProd(StoreDevtoolsModule.instrument())
+    excludeFromProd(StoreDevtoolsModule.instrument()),
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

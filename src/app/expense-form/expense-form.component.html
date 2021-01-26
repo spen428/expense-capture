@@ -1,0 +1,34 @@
+<!--suppress HtmlFormInputWithoutLabel -->
+<div class="form-container">
+  <mat-form-field appearance="standard">
+    <mat-label>Expense Name</mat-label>
+    <input matInput required>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Expense Description</mat-label>
+    <input matInput required>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Expense Type</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let x of expenseTypes" [value]="x">{{nameOf(x)}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Expense Date</mat-label>
+    <input matInput required>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Monetary Value</mat-label>
+    <input matInput required>
+  </mat-form-field>
+
+  <div class="button-container">
+    <button mat-raised-button color="primary">Submit</button>
+    <button mat-button color="warn">Reset</button>
+  </div>
+</div>
