@@ -8,4 +8,3 @@ export class ExpenseItem {
     expenseDate: Date;
     value: number;
   }
-  
