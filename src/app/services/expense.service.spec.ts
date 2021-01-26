@@ -1,4 +1,3 @@
-import {async, TestBed} from '@angular/core/testing';
 import {ExpenseService} from './expense.service';
 import {ExpenseItem} from '../models/expense-item';
 import {v4 as uuid} from 'uuid';
@@ -7,15 +6,10 @@ import {randomDate, randomInt} from '../../testcore/TestRandom';
 describe('ExpenseService', () => {
   let expenseService: ExpenseService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [],
-      providers: [],
-    }).compileComponents();
-
+  beforeEach(() => {
     expenseService = new ExpenseService();
     window.localStorage.clear();
-  }));
+  });
 
   function randomExpenseItem(): ExpenseItem {
     return {
