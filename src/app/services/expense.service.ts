@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ExpenseItem} from '../models/expense-item';
+import {Observable, of} from 'rxjs';
 
 @Injectable()
 export class ExpenseService {
@@ -21,18 +22,22 @@ export class ExpenseService {
     return itemList;
   }
 
-  addItem(item: ExpenseItem): void {
+  addItem(item: ExpenseItem): Observable<ExpenseItem> {
     if (!item) {
       throw new Error('Attempted to add an invalid ExpenseItem');
     }
+
+    item.id = this.getNextId();
 
     const itemList = this.getItems();
     itemList.push(item);
 
     this.writeToLocalStorage(itemList);
+
+    return of(item);
   }
 
-  deleteItem(itemId: number): ExpenseItem {
+  deleteItem(itemId: number): Observable<ExpenseItem> {
     const itemList = this.getItems();
 
     const indexToRemove = itemList.findIndex(x => x.id === itemId);
@@ -42,10 +47,20 @@ export class ExpenseService {
 
     const removedItem = itemList.splice(indexToRemove, 1)[0];
     this.writeToLocalStorage(itemList);
-    return removedItem;
+    return of(removedItem);
   }
 
   private writeToLocalStorage(itemList: ExpenseItem[]): void {
     window.localStorage.setItem(this.localStorageKey, JSON.stringify(itemList));
+  }
+
+  private getNextId(): number {
+    const items = this.getItems();
+    if (items.length === 0) {
+      return 0;
+    }
+
+    const highestId = items.map(x => x.id).sort((o1, o2) => o2 - o1)[0];
+    return highestId + 1;
   }
 }

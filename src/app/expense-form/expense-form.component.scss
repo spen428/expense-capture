@@ -1,4 +1,4 @@
-.form-container {
+.form-container, .form-container > form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -13,4 +13,9 @@
 
 button {
   width: 85px;
+}
+
+.deleter {
+  color: red;
+  cursor: pointer;
 }
