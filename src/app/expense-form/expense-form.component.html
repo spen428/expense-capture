@@ -1,6 +1,6 @@
 <!--suppress HtmlFormInputWithoutLabel -->
 <div class="form-container">
-  <form [formGroup]="formGroup" (ngSubmit)="onSubmit(form)" #form="ngForm">
+  <form [formGroup]="formGroup" #form="ngForm">
 
     <mat-form-field appearance="standard">
       <mat-label>Expense Name</mat-label>
@@ -14,7 +14,7 @@
 
     <mat-form-field appearance="standard">
       <mat-label>Expense Type</mat-label>
-      <mat-select formControlName="expenseType">
+      <mat-select formControlName="expenseType" required>
         <mat-option *ngFor="let expenseType of expenseTypes" [value]="expenseType">
           {{expenseType | expenseTypeName}}
         </mat-option>
@@ -28,12 +28,18 @@
 
     <mat-form-field appearance="standard">
       <mat-label>Monetary Value</mat-label>
-      <input matInput required formControlName="value">
+      <input matInput required formControlName="value" type="number">
     </mat-form-field>
 
     <div class="button-container">
-      <button mat-raised-button color="primary" type="submit">Submit</button>
-      <button mat-button color="warn" (click)="onReset()">Reset</button>
+      <button mat-raised-button
+              color="primary"
+              type="submit"
+              (click)="onSubmit(form)"
+              [disabled]='!form.valid'>
+        Submit
+      </button>
+      <button mat-button color="warn" (click)="onReset(form)">Reset</button>
     </div>
 
   </form>
@@ -42,6 +48,7 @@
 <div>
   <p *ngIf="(this.allExpenses$ | async).length === 0">No expenses yet!</p>
   <div *ngFor="let expense of (this.allExpenses$ | async)">
-    <p>{{expense.name}} (£{{expense.value}}) <a class="deleter" (click)="onDelete(expense.id)">Delete #{{expense.id}}</a></p>
+    <p>{{expense.name}} (£{{expense.value}}) <a class="deleter" (click)="onDelete(expense.id)">Delete
+      #{{expense.id}}</a></p>
   </div>
 </div>

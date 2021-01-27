@@ -3,7 +3,7 @@ import {ExpenseType} from '../enums/expense-types.enum';
 import {EnumUtils} from '../utils/enum-utils';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import {FormControl, FormGroup, FormGroupDirective} from '@angular/forms';
+import {FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ExpenseState} from '../ngrx/expense-form.reducer';
 import {ExpenseActions} from '../ngrx/expense-form.actions';
 import {ExpenseFormSelector} from '../ngrx/expense-form.selector';
@@ -26,11 +26,11 @@ export class ExpenseFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
-      name: new FormControl(),
-      description: new FormControl(),
-      expenseType: new FormControl(),
-      expenseDate: new FormControl(new Date().toISOString()),
-      value: new FormControl(),
+      name: new FormControl(null, Validators.minLength(1)),
+      description: new FormControl(null, Validators.minLength(1)),
+      expenseType: new FormControl(null, Validators.required),
+      expenseDate: new FormControl(null, Validators.required),
+      value: new FormControl(null, Validators.min(0)),
     });
   }
 
@@ -39,8 +39,9 @@ export class ExpenseFormComponent implements OnInit {
     form.resetForm();
   }
 
-  onReset(): void {
+  onReset(form: FormGroupDirective): void {
     this.store.dispatch(ExpenseActions.resetForm());
+    form.resetForm();
   }
 
   onDelete(id: number): void {
