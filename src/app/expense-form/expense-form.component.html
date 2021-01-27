@@ -44,11 +44,3 @@
 
   </form>
 </div>
-
-<div>
-  <p *ngIf="(this.allExpenses$ | async).length === 0">No expenses yet!</p>
-  <div *ngFor="let expense of (this.allExpenses$ | async)">
-    <p>{{expense.name}} (£{{expense.value}}) <a class="deleter" (click)="onDelete(expense.id)">Delete
-      #{{expense.id}}</a></p>
-  </div>
-</div>

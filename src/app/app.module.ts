@@ -18,6 +18,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {ExpenseFormEffects} from './ngrx/expense-form.effects';
 import {ExpenseService} from './services/expense.service';
 import {expenseFormReducer} from './ngrx/expense-form.reducer';
+import { ExpenseListComponent } from './expense-list/expense-list.component';
+import {MatDividerModule} from '@angular/material/divider';
 
 function excludeFromProd<T>(module: ModuleWithProviders<T>): T[] | ModuleWithProviders<T> {
   return environment.production ? [] : module;
@@ -27,7 +29,8 @@ function excludeFromProd<T>(module: ModuleWithProviders<T>): T[] | ModuleWithPro
   declarations: [
     AppComponent,
     ExpenseFormComponent,
-    ExpenseTypeNamePipe
+    ExpenseTypeNamePipe,
+    ExpenseListComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ function excludeFromProd<T>(module: ModuleWithProviders<T>): T[] | ModuleWithPro
     MatSelectModule,
     MatButtonModule,
     ReactiveFormsModule,
+    MatDividerModule,
   ],
   providers: [ExpenseService],
   bootstrap: [AppComponent]

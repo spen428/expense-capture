@@ -32,8 +32,6 @@ export class ExpenseFormComponent implements OnInit {
       expenseDate: new FormControl(null, Validators.required),
       value: new FormControl(null, Validators.min(0)),
     });
-
-    this.store.dispatch(ExpenseActions.loadExpenses());
   }
 
   onSubmit(form: FormGroupDirective): void {
@@ -44,9 +42,5 @@ export class ExpenseFormComponent implements OnInit {
   onReset(form: FormGroupDirective): void {
     this.store.dispatch(ExpenseActions.resetForm());
     form.resetForm();
-  }
-
-  onDelete(id: number): void {
-    this.store.dispatch(ExpenseActions.deleteExpense({expenseId: id}));
   }
 }
