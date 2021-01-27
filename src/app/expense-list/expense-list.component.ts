@@ -5,6 +5,7 @@ import {ExpenseState} from '../ngrx/expense-form.reducer';
 import {ExpenseFormSelector} from '../ngrx/expense-form.selector';
 import {Observable} from 'rxjs';
 import {ExpenseItem} from '../models/expense-item';
+import {ExpenseType} from '../enums/expense-types.enum';
 
 @Component({
   selector: 'app-expense-list',
@@ -24,5 +25,20 @@ export class ExpenseListComponent implements OnInit {
 
   onDelete(id: number): void {
     this.store.dispatch(ExpenseActions.deleteExpense({expenseId: id}));
+  }
+
+  getExpenseColor(expenseType: ExpenseType): string {
+    switch (expenseType) {
+      case ExpenseType.PublicTransport:
+        return 'firebrick';
+      case ExpenseType.Food:
+        return 'cornflowerblue';
+      case ExpenseType.Accommodation:
+        return 'mediumpurple';
+      case ExpenseType.Mileage:
+        return 'olivedrab';
+      default:
+        return 'tan';
+    }
   }
 }

@@ -287,6 +287,15 @@ svg#clouds {
   }
 }
 
+$form-width: 350px;
+
+app-expense-form {
+  width: $form-width;
+}
+
 app-expense-list {
-  padding-top: 32px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 2px solid #125699;
+  width: $form-width;
 }

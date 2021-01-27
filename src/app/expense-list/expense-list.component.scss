@@ -1,4 +1,52 @@
-.deleter {
-  color: red;
-  cursor: pointer;
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.expense {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 8px;
+  border-radius: 8px;
+
+  color: #e6ebf1;
+  background-color: cornflowerblue;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 12px 48px 0;
+
+    font-size: small;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 8px 0 12px 24px;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      width: 30%;
+    }
+
+    .name {
+      font-weight: bold;
+    }
+
+    .desc {
+      font-style: italic;
+    }
+
+    button {
+      font-weight: bold;
+      font-size: 13pt;
+    }
+  }
 }

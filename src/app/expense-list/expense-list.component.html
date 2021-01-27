@@ -1,7 +1,22 @@
-<div>
+<div class="root">
   <p *ngIf="(this.allExpenses$ | async).length === 0">No expenses yet!</p>
-  <div *ngFor="let expense of (this.allExpenses$ | async)">
-    <p>{{expense.name}} (£{{expense.value}}) <a class="deleter" (click)="onDelete(expense.id)">Delete
-      #{{expense.id}}</a></p>
+  <div *ngFor="let expense of (this.allExpenses$ | async)"
+       class="expense"
+       [style]="'background-color: ' + getExpenseColor(expense.expenseType) + ';'">
+
+    <div class="header">
+      <span>2020-01-01</span>
+      <span>{{expense.expenseType | expenseTypeName}}</span>
+    </div>
+
+    <div class="body">
+      <div>
+        <span class="name">{{expense.name}}</span>
+        <span class="desc">{{expense.description}}</span>
+      </div>
+      <span>£{{expense.value}}</span>
+      <button mat-button color="warn" (click)="onDelete(expense.id)">✗</button>
+    </div>
+
   </div>
 </div>
