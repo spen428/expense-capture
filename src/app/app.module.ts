@@ -13,7 +13,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
-import { ExpenseTypeNamePipe } from './pipes/expense-type-name.pipe';
+import {ExpenseTypeNamePipe} from './pipes/expense-type-name.pipe';
+import {ReactiveFormsModule} from '@angular/forms';
+import {ExpenseFormEffects} from './ngrx/expense-form.effects';
+import {ExpenseService} from './services/expense.service';
+import {expenseFormReducer} from './ngrx/expense-form.reducer';
 
 function excludeFromProd<T>(module: ModuleWithProviders<T>): T[] | ModuleWithProviders<T> {
   return environment.production ? [] : module;
@@ -28,7 +32,9 @@ function excludeFromProd<T>(module: ModuleWithProviders<T>): T[] | ModuleWithPro
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {
+    StoreModule.forRoot({
+      expenseStore: expenseFormReducer
+    }, {
       runtimeChecks: {
         strictActionImmutability: true,
         strictActionSerializability: true,
@@ -38,15 +44,16 @@ function excludeFromProd<T>(module: ModuleWithProviders<T>): T[] | ModuleWithPro
         strictStateSerializability: true
       }
     }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([ExpenseFormEffects]),
     excludeFromProd(StoreDevtoolsModule.instrument()),
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [ExpenseService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
