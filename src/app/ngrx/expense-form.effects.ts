@@ -4,6 +4,7 @@ import {map, mergeMap} from 'rxjs/operators';
 import {ExpenseService} from '../services/expense.service';
 import {ExpenseActions} from './expense-form.actions';
 import {serialize} from '../models/expense-item';
+import {of} from 'rxjs';
 
 @Injectable()
 export class ExpenseFormEffects {
@@ -36,6 +37,14 @@ export class ExpenseFormEffects {
       ofType(ExpenseActions.deleteExpense),
       mergeMap(action => this.expenseService.deleteItem(action.expenseId)),
       map(deletedExpenseItem => ExpenseActions.expenseDeleted(serialize(deletedExpenseItem)))
+    );
+  });
+
+  readonly loadExpenses$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ExpenseActions.loadExpenses),
+      mergeMap(() => of(this.expenseService.getItems())),
+      map(items => ExpenseActions.expensesLoaded({expenses: items.map(serialize)}))
     );
   });
 }

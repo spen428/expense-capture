@@ -16,5 +16,10 @@ export const expenseFormReducer = createReducer({expenses: []},
     (state, expenseItem) => {
       return {...state, expenses: state.expenses.filter(x => x.id !== expenseItem.id)};
     }
+  ),
+  on(ExpenseActions.expensesLoaded,
+    (state, action) => {
+      return {...state, expenses: action.expenses};
+    }
   )
 );
