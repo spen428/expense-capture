@@ -18,8 +18,10 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {ExpenseFormEffects} from './ngrx/expense-form.effects';
 import {ExpenseService} from './services/expense.service';
 import {expenseFormReducer} from './ngrx/expense-form.reducer';
-import { ExpenseListComponent } from './expense-list/expense-list.component';
+import {ExpenseListComponent} from './expense-list/expense-list.component';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 function excludeFromProd<T>(module: ModuleWithProviders<T>): T[] | ModuleWithProviders<T> {
   return environment.production ? [] : module;
@@ -56,6 +58,8 @@ function excludeFromProd<T>(module: ModuleWithProviders<T>): T[] | ModuleWithPro
     MatButtonModule,
     ReactiveFormsModule,
     MatDividerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [ExpenseService],
   bootstrap: [AppComponent]

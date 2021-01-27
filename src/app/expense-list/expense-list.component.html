@@ -5,7 +5,7 @@
        [style]="'background-color: ' + getExpenseColor(expense.expenseType) + ';'">
 
     <div class="header">
-      <span>2020-01-01</span>
+      <span>{{expense.expenseDate.toLocaleDateString()}}</span>
       <span>{{expense.expenseType | expenseTypeName}}</span>
     </div>
 

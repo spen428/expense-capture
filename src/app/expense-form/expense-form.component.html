@@ -23,7 +23,9 @@
 
     <mat-form-field appearance="standard">
       <mat-label>Expense Date</mat-label>
-      <input matInput required formControlName="expenseDate">
+      <input matInput [matDatepicker]="picker" required formControlName="expenseDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field appearance="standard">

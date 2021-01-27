@@ -7,7 +7,7 @@ import {FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/f
 import {ExpenseState} from '../ngrx/expense-form.reducer';
 import {ExpenseActions} from '../ngrx/expense-form.actions';
 import {ExpenseFormSelector} from '../ngrx/expense-form.selector';
-import {ExpenseFormData} from '../models/expense-form-data';
+import {ExpenseFormData, serialize} from '../models/expense-form-data';
 import {ExpenseItem} from '../models/expense-item';
 
 @Component({
@@ -29,13 +29,14 @@ export class ExpenseFormComponent implements OnInit {
       name: new FormControl(null, Validators.minLength(1)),
       description: new FormControl(null, Validators.minLength(1)),
       expenseType: new FormControl(null, Validators.required),
-      expenseDate: new FormControl(null, Validators.required),
+      expenseDate: new FormControl(new Date(), Validators.required),
       value: new FormControl(null, Validators.min(0)),
     });
   }
 
   onSubmit(form: FormGroupDirective): void {
-    this.store.dispatch(ExpenseActions.submitForm(this.formGroup.value as ExpenseFormData));
+    const formData = serialize(this.formGroup.value as ExpenseFormData);
+    this.store.dispatch(ExpenseActions.submitForm(formData));
     form.resetForm();
   }
 
